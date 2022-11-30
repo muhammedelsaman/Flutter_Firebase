@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_demo/ui/screens/home_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../services/auth_user_notifier.dart';
 
-class RegisterScreen extends StatefulWidget {
+class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  ConsumerState<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   final formKey = GlobalKey<FormState>();
 
   String _email = '';
@@ -201,8 +202,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: 50.0,
                   ),
                   Consumer(
-                    builder:
-                        (BuildContext context, WidgetRef ref, Widget? child) {
+                    builder: (_, ref, __) {
                       return MaterialButton(
                         minWidth: double.infinity,
                         height: 50.0,
@@ -216,12 +216,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         onPressed: () async {
                           if (formKey.currentState!.validate()) {
                             formKey.currentState!.save();
-                            ref.read(AuthNotifier.provider.notifier).register(
-                                email: _email,
-                                password: _password,
-                                surepassword: _surepassword,
-                                firstname: _firstName,
-                                lastname: _lastName);
+                            ref
+                                .read(AuthUserNotifier.provider.notifier)
+                                .register(
+                                  email: _email,
+                                  password: _password,
+                                  surepassword: _surepassword,
+                                  firstname: _firstName,
+                                  lastname: _lastName,
+                                );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const HomeScreen(),
+                              ),
+                            );
                           }
                         },
                         child: const Text(
