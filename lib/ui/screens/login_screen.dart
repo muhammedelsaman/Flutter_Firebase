@@ -3,7 +3,7 @@ import 'package:flutter_firebase_demo/services/auth_user_notifier.dart';
 import 'package:flutter_firebase_demo/ui/screens/register_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'home_screen.dart';
+import 'layout_screen.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -70,6 +70,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         },
                         decoration: const InputDecoration(
                           hintText: 'اسم المستخدم',
+                          fillColor: Color(0xff9CB3BE),
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10.0))),
@@ -108,6 +109,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         obscureText: true,
                         decoration: const InputDecoration(
                           hintText: 'كلمة المرور',
+                          fillColor: Color(0xff9CB3BE),
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10.0))),
@@ -163,7 +165,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const HomeScreen(),
+                                  builder: (context) => const LayoutScreen(),
                                 ),
                               );
                             }

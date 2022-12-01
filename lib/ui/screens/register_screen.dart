@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase_demo/ui/screens/home_screen.dart';
+import 'package:flutter_firebase_demo/ui/screens/layout_screen.dart';
+import 'package:flutter_firebase_demo/ui/screens/login_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../services/auth_user_notifier.dart';
@@ -25,6 +26,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     return Scaffold(
       backgroundColor: const Color(0xffF5F5F5),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         elevation: 0.0,
         title: const Text(
           'أنشاء حساب',
@@ -35,6 +37,25 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           ),
         ),
         backgroundColor: const Color(0xffF5F5F5),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 15.0),
+            child: IconButton(
+              icon: const Icon(
+                Icons.arrow_forward,
+                color: Color(0xff2A5579),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LoginScreen(),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
       body: SafeArea(
         child: Form(
@@ -228,7 +249,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const HomeScreen(),
+                                builder: (context) => const LayoutScreen(),
                               ),
                             );
                           }
