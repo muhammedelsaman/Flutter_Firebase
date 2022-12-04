@@ -3,6 +3,8 @@ import 'package:flutter_firebase_demo/services/auth_user_notifier.dart';
 import 'package:flutter_firebase_demo/ui/screens/register_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'layout_screen.dart';
+
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -68,6 +70,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         },
                         decoration: const InputDecoration(
                           hintText: 'اسم المستخدم',
+                          fillColor: Color(0xff9CB3BE),
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10.0))),
@@ -106,6 +109,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         obscureText: true,
                         decoration: const InputDecoration(
                           hintText: 'كلمة المرور',
+                          fillColor: Color(0xff9CB3BE),
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10.0))),
@@ -138,35 +142,43 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       height: 40.0,
                     ),
                     Consumer(
-                      builder: (_, ref,__) {
-                      return MaterialButton(
-                        minWidth: double.infinity,
-                        height: 50.0,
-                        color: const Color(0xffF26D33),
-                        shape: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10.0),
+                      builder: (_, ref, __) {
+                        return MaterialButton(
+                          minWidth: double.infinity,
+                          height: 50.0,
+                          color: const Color(0xffF26D33),
+                          shape: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10.0),
+                            ),
+                            borderSide: BorderSide(color: Color(0xffF26D33)),
                           ),
-                          borderSide: BorderSide(color: Color(0xffF26D33)),
-                        ),
-                        onPressed: () async {
-                          if (formKey.currentState!.validate()) {
-                            formKey.currentState!.save();
-                            ref.read(AuthNotifier.provider.notifier).login(
-                                email: _email,
-                                password: _password,
-                            );
-                          }
-                        },
-                        child: const Text(
-                          'تسجيل الدخول',
-                          style: TextStyle(
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                          onPressed: () async {
+                            if (formKey.currentState!.validate()) {
+                              formKey.currentState!.save();
+                              ref
+                                  .read(AuthUserNotifier.provider.notifier)
+                                  .login(
+                                    email: _email,
+                                    password: _password,
+                                  );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const LayoutScreen(),
+                                ),
+                              );
+                            }
+                          },
+                          child: const Text(
+                            'تسجيل الدخول',
+                            style: TextStyle(
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
-                      );
+                        );
                       },
                     ),
                     const SizedBox(
@@ -208,18 +220,25 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     Container(
                       width: double.infinity,
                       height: 50.0,
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0,),
-                      color: const Color(0xffF5F5F5), border: Border.all(color: const Color(0xffF26D33)),
-                          //borderSide: BorderSide(color: Color(0xffF26D33)),,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          10.0,
+                        ),
+                        color: const Color(0xffF5F5F5),
+                        border: Border.all(color: const Color(0xffF26D33)),
+                        //borderSide: BorderSide(color: Color(0xffF26D33)),,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           MaterialButton(
                             onPressed: () {
-                              Navigator.push(context,
-                                MaterialPageRoute(builder:
-                                    (context) => const RegisterScreen(),),);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const RegisterScreen(),
+                                ),
+                              );
                             },
                             child: const Text(
                               'تسجيل حساب جديد',

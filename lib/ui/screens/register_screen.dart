@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_demo/ui/screens/layout_screen.dart';
+import 'package:flutter_firebase_demo/ui/screens/login_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../services/auth_user_notifier.dart';
 
-class RegisterScreen extends StatefulWidget {
+class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  ConsumerState<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   final formKey = GlobalKey<FormState>();
 
   String _email = '';
@@ -24,6 +26,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       backgroundColor: const Color(0xffF5F5F5),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         elevation: 0.0,
         title: const Text(
           'أنشاء حساب',
@@ -34,6 +37,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
         ),
         backgroundColor: const Color(0xffF5F5F5),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 15.0),
+            child: IconButton(
+              icon: const Icon(
+                Icons.arrow_forward,
+                color: Color(0xff2A5579),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LoginScreen(),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
       body: SafeArea(
         child: Form(
@@ -201,8 +223,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: 50.0,
                   ),
                   Consumer(
-                    builder:
-                        (BuildContext context, WidgetRef ref, Widget? child) {
+                    builder: (_, ref, __) {
                       return MaterialButton(
                         minWidth: double.infinity,
                         height: 50.0,
@@ -216,12 +237,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         onPressed: () async {
                           if (formKey.currentState!.validate()) {
                             formKey.currentState!.save();
-                            ref.read(AuthNotifier.provider.notifier).register(
-                                email: _email,
-                                password: _password,
-                                surepassword: _surepassword,
-                                firstname: _firstName,
-                                lastname: _lastName);
+                            ref
+                                .read(AuthUserNotifier.provider.notifier)
+                                .register(
+                                  email: _email,
+                                  password: _password,
+                                  surepassword: _surepassword,
+                                  firstname: _firstName,
+                                  lastname: _lastName,
+                                );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const LayoutScreen(),
+                              ),
+                            );
                           }
                         },
                         child: const Text(
