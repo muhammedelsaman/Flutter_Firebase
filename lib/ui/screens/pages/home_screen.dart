@@ -1,11 +1,13 @@
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase_demo/ui/screens/main_page.dart';
-import 'package:flutter_firebase_demo/ui/screens/profile_page.dart';
+import 'package:flutter_firebase_demo/generated/locale_keys.g.dart';
+import 'package:flutter_firebase_demo/ui/screens/pages/main_page.dart';
+import 'package:flutter_firebase_demo/ui/screens/pages/profile_page.dart';
 
-class LayoutScreen extends StatefulWidget {
-  const LayoutScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
   @override
-  State<LayoutScreen> createState() => _LayoutScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class MyTabs {
@@ -13,11 +15,11 @@ class MyTabs {
   MyTabs({this.title});
 }
 
-class _LayoutScreenState extends State<LayoutScreen>
+class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   final List<MyTabs> _tabs = [
-    MyTabs(title: 'الرئيسية'),
-    MyTabs(title: 'حسابي'),
+    MyTabs(title: LocaleKeys.main.tr()),
+    MyTabs(title: LocaleKeys.profile.tr()),
   ];
 
   late MyTabs _myHandler;
@@ -77,7 +79,7 @@ class _LayoutScreenState extends State<LayoutScreen>
         ),
         body: TabBarView(
           controller: _tabController,
-          children: const [MainPage(), ProfilePage()],
+          children:  const [MainPage(), ProfilePage()],
         ),
         drawer: Drawer(
           backgroundColor: const Color(0xffFFFFFF),
@@ -119,9 +121,9 @@ class _LayoutScreenState extends State<LayoutScreen>
                       horizontal: 20.0,
                       vertical: 10.0,
                     ),
-                    title: const Text(
-                      'الرئيسية',
-                      style: TextStyle(
+                    title: Text(
+                      LocaleKeys.main.tr(),
+                      style: const TextStyle(
                           color: Color(0xff398BAF),
                           fontSize: 14.0,
                           fontWeight: FontWeight.bold),
@@ -141,9 +143,9 @@ class _LayoutScreenState extends State<LayoutScreen>
                     ),
                   ),
                   ListTile(
-                    title: const Text(
-                      'حسابي',
-                      style: TextStyle(
+                    title: Text(
+                      LocaleKeys.profile.tr(),
+                      style: const TextStyle(
                           color: Color(0xff398BAF),
                           fontSize: 14.0,
                           fontWeight: FontWeight.bold),
@@ -163,9 +165,9 @@ class _LayoutScreenState extends State<LayoutScreen>
                     ),
                   ),
                   ListTile(
-                    title: const Text(
-                      'المحفوظات',
-                      style: TextStyle(
+                    title: Text(
+                      LocaleKeys.archives.tr(),
+                      style: const TextStyle(
                           color: Color(0xff398BAF),
                           fontSize: 14.0,
                           fontWeight: FontWeight.bold),
@@ -185,19 +187,54 @@ class _LayoutScreenState extends State<LayoutScreen>
                     ),
                   ),
                   ListTile(
-                    title: const Text(
-                      'تسجيل الخروج',
-                      style: TextStyle(
+                    title: Text(
+                      LocaleKeys.logout.tr(),
+                      style: const TextStyle(
                           color: Color(0xff398BAF),
                           fontSize: 14.0,
                           fontWeight: FontWeight.bold),
                     ),
                     leading: const Icon(
-                      Icons.exit_to_app,
+                      Icons.exit_to_app_sharp,
                       color: Color(0xff398BAF),
                     ),
                     onTap: () {
                       Navigator.pop(context);
+                    },
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                    child: Divider(
+                      color: Color(0xff398BAF),
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      LocaleKeys.language.tr(),
+                      style: const TextStyle(
+                          color: Color(0xff398BAF),
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    leading: const Icon(
+                      Icons.language,
+                      color: Color(0xff398BAF),
+                    ),
+                    onTap: () {
+                        if(context.locale.languageCode=='ar'){
+                           context.setLocale(
+                            const Locale(
+                              "en",
+                            ),
+                          );
+                        }else{
+                          context.setLocale(
+                            const Locale(
+                              "ar",
+                            ),
+                          );
+                        }
+
                     },
                   ),
                 ],

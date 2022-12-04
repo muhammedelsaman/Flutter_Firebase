@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_firebase_demo/services/i_service_users.dart';
@@ -60,14 +59,14 @@ class UserService implements IUserService {
       final uid = user?.uid;
 
 
-    createUser(
-      email: email,
-      password: password,
-      surepassword: surepassword,
-      firstname: firstname,
-      lastname: lastname,
-      uid: uid,
-    );
+    // createUser(
+    //   email: email,
+    //   password: password,
+    //   surepassword: surepassword,
+    //   firstname: firstname,
+    //   lastname: lastname,
+    //   uid: uid,
+    // );
 
     debugPrint(uid.toString());
 
@@ -81,33 +80,33 @@ class UserService implements IUserService {
     // }
   }
 
-  @override
-  Future<UserModel> createUser({
-    required email,
-    required password,
-    required surepassword,
-    required firstname,
-    required lastname,
-    required uid,
-  }) async {
-    //try {
-    UserModel model = UserModel(
-      email: email,
-      password: password,
-      surepassword: surepassword,
-      firstname: firstname,
-      lastname: lastname,
-      uid: uid,
-    );
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(uid)
-        .set(model.toJson());
-
-    return model;
-
-    // } catch (e) {
-    //   throw StateError('failed');
-    // }
-  }
+  // @override
+  // Future<UserModel> createUser({
+  //   required email,
+  //   required password,
+  //   required surepassword,
+  //   required firstname,
+  //   required lastname,
+  //   required uid,
+  // }) async {
+  //   //try {
+  //   UserModel model = UserModel(
+  //     email: email,
+  //     password: password,
+  //     surepassword: surepassword,
+  //     firstname: firstname,
+  //     lastname: lastname,
+  //     uid: uid,
+  //   );
+  //   await FirebaseFirestore.instance
+  //       .collection('users')
+  //       .doc(uid)
+  //       .set(model.toJson());
+  //
+  //   return model;
+  //
+  //   // } catch (e) {
+  //   //   throw StateError('failed');
+  //   // }
+  // }
 }

@@ -75,7 +75,7 @@ class AuthUserNotifier extends StateNotifier<LoginStates> {
     required String lastname,
   }) async {
     state = LoginLoading();
-    //try {
+    try {
       final dataRegister = await _iUserService.register(
         email: email,
         password: password,
@@ -88,35 +88,35 @@ class AuthUserNotifier extends StateNotifier<LoginStates> {
 
       debugPrint(state.toString());
       debugPrint('ooooo');
-    // } catch (e) {
-    //   state = LoginError((e as StateError).message);
-    // }
+     } catch (e) {
+       state = LoginError((e as StateError).message);
+    }
   }
 
-  Future<void> createRegister({
-    required String email,
-    required String password,
-    required String surepassword,
-    required String firstname,
-    required String lastname,
-    required String uid,
-  }) async {
-    state = LoginLoading();
-    //try {
-    final dataRegister = await _iUserService.createUser(
-        email: email,
-        password: password,
-        surepassword: surepassword,
-        firstname: firstname, lastname: lastname,
-        uid: uid,
-    );
-
-    state = CreateUserSuccess(dataRegister);
-
-    debugPrint(state.toString());
-    debugPrint('ooooo');
-    // } catch (e) {
-    //   state = LoginError((e as StateError).message);
-    // }
-  }
+  // Future<void> createRegister({
+  //   required String email,
+  //   required String password,
+  //   required String surepassword,
+  //   required String firstname,
+  //   required String lastname,
+  //   required String uid,
+  // }) async {
+  //   state = LoginLoading();
+  //   //try {
+  //   final dataRegister = await _iUserService.createUser(
+  //       email: email,
+  //       password: password,
+  //       surepassword: surepassword,
+  //       firstname: firstname, lastname: lastname,
+  //       uid: uid,
+  //   );
+  //
+  //   state = CreateUserSuccess(dataRegister);
+  //
+  //   debugPrint(state.toString());
+  //   debugPrint('ooooo');
+  //   // } catch (e) {
+  //   //   state = LoginError((e as StateError).message);
+  //   // }
+  // }
 }
