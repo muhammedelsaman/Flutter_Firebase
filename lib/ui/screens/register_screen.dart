@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase_demo/ui/screens/layout_screen.dart';
+import 'package:flutter_firebase_demo/generated/locale_keys.g.dart';
 import 'package:flutter_firebase_demo/ui/screens/login_screen.dart';
+import 'package:flutter_firebase_demo/ui/screens/pages/home_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../services/auth_user_notifier.dart';
@@ -28,9 +30,9 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         elevation: 0.0,
-        title: const Text(
-          'أنشاء حساب',
-          style: TextStyle(
+        title:  Text(
+          LocaleKeys.create_account.tr(),
+          style: const TextStyle(
             fontSize: 25.0,
             fontWeight: FontWeight.bold,
             color: Color(0xff2A5579),
@@ -72,10 +74,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   const SizedBox(
                     height: 10.0,
                   ),
-                  const Text(
-                    'البريد الالكتروني',
+                   Text(
+                   LocaleKeys.email.tr(),
                     style:
-                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                        const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
                     height: 10.0,
@@ -102,10 +104,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   const SizedBox(
                     height: 20.0,
                   ),
-                  const Text(
-                    'كلمة المرور',
+                  Text(
+                    LocaleKeys.password.tr(),
                     style:
-                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                        const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
                     height: 10.0,
@@ -132,10 +134,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   const SizedBox(
                     height: 20.0,
                   ),
-                  const Text(
-                    'تأكيد كلمة المرور',
+                  Text(
+                    LocaleKeys.confirm_password.tr(),
                     style:
-                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                        const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
                     height: 10.0,
@@ -162,10 +164,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   const SizedBox(
                     height: 20.0,
                   ),
-                  const Text(
-                    'الاسم الاول',
+                  Text(
+                    LocaleKeys.first_name.tr(),
                     style:
-                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                        const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
                     height: 10.0,
@@ -192,10 +194,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   const SizedBox(
                     height: 20.0,
                   ),
-                  const Text(
-                    'الاسم الاخير',
+                   Text(
+                    LocaleKeys.last_name.tr(),
                     style:
-                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                        const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
                     height: 10.0,
@@ -249,14 +251,14 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const LayoutScreen(),
+                                builder: (context) => const HomeScreen(),
                               ),
                             );
                           }
                         },
-                        child: const Text(
-                          'انشاء حساب',
-                          style: TextStyle(
+                        child: Text(
+                          LocaleKeys.create_account.tr(),
+                          style: const TextStyle(
                             fontSize: 14.0,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,

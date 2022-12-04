@@ -1,9 +1,10 @@
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_demo/generated/locale_keys.g.dart';
 import 'package:flutter_firebase_demo/services/auth_user_notifier.dart';
+import 'package:flutter_firebase_demo/ui/screens/pages/home_screen.dart';
 import 'package:flutter_firebase_demo/ui/screens/register_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'layout_screen.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -32,9 +33,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const Text(
-                      'تسجيل الدخول',
-                      style: TextStyle(
+                     Text(
+                      LocaleKeys.sign_in.tr(),
+                      style: const TextStyle(
                         fontSize: 40.0,
                         fontWeight: FontWeight.bold,
                         color: Color(0xff2A5579),
@@ -49,7 +50,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: const [
                           Text(
-                            'اسم المتخدم',
+                           LocaleKeys.username,
                             style: TextStyle(
                                 fontSize: 20.0, fontWeight: FontWeight.bold),
                           ),
@@ -68,10 +69,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           }
                           return null;
                         },
-                        decoration: const InputDecoration(
-                          hintText: 'اسم المستخدم',
-                          fillColor: Color(0xff9CB3BE),
-                          border: OutlineInputBorder(
+                        decoration: InputDecoration(
+                          hintText: LocaleKeys.username.tr(),
+                          fillColor: const Color(0xff9CB3BE),
+                          border: const OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10.0))),
                         ),
@@ -84,9 +85,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       padding: const EdgeInsets.all(10.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
-                        children: const [
+                        children:  const [
                           Text(
-                            'كلمة المرور',
+                            LocaleKeys.password,
                             style: TextStyle(
                                 fontSize: 20.0, fontWeight: FontWeight.bold),
                           ),
@@ -107,16 +108,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         },
                         keyboardType: TextInputType.visiblePassword,
                         obscureText: true,
-                        decoration: const InputDecoration(
-                          hintText: 'كلمة المرور',
-                          fillColor: Color(0xff9CB3BE),
-                          border: OutlineInputBorder(
+                        decoration:  InputDecoration(
+                          hintText: LocaleKeys.password.tr(),
+                          fillColor: const Color(0xff9CB3BE),
+                          border: const OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10.0))),
-                          prefixIcon: Icon(
+                          prefixIcon: const Icon(
                             Icons.lock,
                           ),
-                          suffixIcon: Icon(
+                          suffixIcon: const Icon(
                             Icons.remove_red_eye,
                           ),
                         ),
@@ -127,9 +128,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       children: [
                         TextButton(
                           onPressed: () {},
-                          child: const Text(
-                            'نسيت كلمة المرور',
-                            style: TextStyle(
+                          child: Text(
+                            LocaleKeys.forget_password.tr(),
+                            style: const TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.bold,
                               color: Color(0xff2A5579),
@@ -165,14 +166,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const LayoutScreen(),
+                                  builder: (context) => const HomeScreen(),
                                 ),
                               );
                             }
                           },
-                          child: const Text(
-                            'تسجيل الدخول',
-                            style: TextStyle(
+                          child:  Text(
+                            LocaleKeys.login.tr(),
+                            style: const TextStyle(
                               fontSize: 14.0,
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -194,7 +195,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             thickness: 1.5,
                           ),
                         ),
-                        const Text('أو'),
+                        Text(LocaleKeys.or.tr()),
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.35,
                           child: const Divider(
@@ -206,9 +207,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     const SizedBox(
                       height: 27.0,
                     ),
-                    const Text(
-                      'اذا لم يكن لديك حساب قم بالتسجيل',
-                      style: TextStyle(
+                     Text(
+                      LocaleKeys.dont_have_account.tr(),
+                      style: const TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                         color: Color(0xff585858),
@@ -240,9 +241,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                 ),
                               );
                             },
-                            child: const Text(
-                              'تسجيل حساب جديد',
-                              style: TextStyle(
+                            child: Text(
+                              LocaleKeys.register_new_account.tr(),
+                              style: const TextStyle(
                                 fontSize: 14.0,
                                 fontWeight: FontWeight.bold,
                                 color: Color(

@@ -11,6 +11,12 @@ class _MainPageState extends State<MainPage> {
   final TextEditingController _textController = TextEditingController();
 
   @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
