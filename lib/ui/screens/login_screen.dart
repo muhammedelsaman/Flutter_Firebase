@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_demo/generated/locale_keys.g.dart';
 import 'package:flutter_firebase_demo/services/auth_user_notifier.dart';
-import 'package:flutter_firebase_demo/ui/screens/pages/home_screen.dart';
+import 'package:flutter_firebase_demo/ui/screens/pages/home/home_screen.dart';
 import 'package:flutter_firebase_demo/ui/screens/register_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -20,6 +20,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //context.locale;
     return Scaffold(
         backgroundColor: const Color(0xffF5F5F5),
         body: SafeArea(

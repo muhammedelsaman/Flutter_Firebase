@@ -1,13 +1,14 @@
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_demo/generated/locale_keys.g.dart';
-import 'package:flutter_firebase_demo/ui/screens/pages/main_page.dart';
-import 'package:flutter_firebase_demo/ui/screens/pages/profile_page.dart';
+import 'package:flutter_firebase_demo/ui/screens/pages/main/main_page.dart';
+import 'package:flutter_firebase_demo/ui/screens/pages/profile/profile_page.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
 class MyTabs {
@@ -15,34 +16,34 @@ class MyTabs {
   MyTabs({this.title});
 }
 
-class _HomeScreenState extends State<HomeScreen>
+class _HomeScreenState extends ConsumerState<HomeScreen>
     with SingleTickerProviderStateMixin {
   final List<MyTabs> _tabs = [
     MyTabs(title: LocaleKeys.main.tr()),
     MyTabs(title: LocaleKeys.profile.tr()),
   ];
 
-  late MyTabs _myHandler;
+  MyTabs? _myHandler;
 
-  late TabController _tabController;
+   TabController? _tabController;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(vsync: this, length: _tabs.length);
     _myHandler = _tabs[0];
-    _tabController.addListener(_handleSelected);
+    _tabController!.addListener(_handleSelected);
   }
 
   void _handleSelected() {
     setState(() {
-      _myHandler = _tabs[_tabController.index];
+      _myHandler = _tabs[_tabController!.index];
     });
   }
 
   @override
   void dispose() {
-    _tabController.dispose();
+    _tabController!.dispose();
     super.dispose();
   }
 
@@ -55,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen>
           backgroundColor: const Color(0xff15567C),
           elevation: 0.0,
           title: Text(
-            _myHandler.title.toString(),
+            _myHandler!.title.toString(),
             style: const TextStyle(
               fontSize: 25.0,
               fontWeight: FontWeight.bold,

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_demo/generated/codegen_loader.g.dart';
-import 'package:flutter_firebase_demo/ui/screens/pages/home_screen.dart';
+import 'package:flutter_firebase_demo/shared/styles/constant_text_style.dart';
+import 'package:flutter_firebase_demo/ui/screens/pages/home/home_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'firebase_options.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -22,7 +24,7 @@ Future<void> main() async {
        assetLoader: const CodegenLoader(),
       path: "assets/translations",
       saveLocale: true,
-      child:  ProviderScope(child: MyApp()),
+      child:   const ProviderScope(child: MyApp()),
     ),
   );
 }
@@ -30,18 +32,30 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  
+
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      debugShowCheckedModeBanner: false,
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      home:  Builder(
-        builder: (context) {
-          print(context.locale);
-          return HomeScreen();
-        }
+    //context.locale;
+    return  ScreenUtilInit(
+      builder: (_,  child) =>
+       MaterialApp(
+        debugShowCheckedModeBanner: false,
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
+        theme: ThemeData(
+            fontFamily: "Almarai",
+            appBarTheme:  AppBarTheme(
+                titleTextStyle:  ConstStyleText.title18GrayTextStyle),
+            primarySwatch: Colors.blue,
+            canvasColor: Colors.white),
+        home:  Builder(
+            builder: (context) {
+            //print(context.locale);
+            return const HomeScreen();
+          }
+        ),
       ),
     );
   }
