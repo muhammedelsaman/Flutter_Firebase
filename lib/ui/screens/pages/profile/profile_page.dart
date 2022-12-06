@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import '../../../../shared/components/navigator.dart';
+import 'edit_profile.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +58,11 @@ class ProfilePage extends StatelessWidget {
             Column(
               children: [
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    navigateTo(
+                        context,
+                        const EditProfile());
+                  },
                   child: const CircleAvatar(
                     radius: 30.0,
                     backgroundColor: Color(0xffF26D33),

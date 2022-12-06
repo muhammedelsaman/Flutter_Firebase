@@ -26,15 +26,23 @@ class LoginError extends LoginStates {
   LoginError(this.error);
 }
 
-class CreateUserSuccess extends LoginStates {
-  final UserModel userModel;
-  CreateUserSuccess(this.userModel);
+class RegisterInitial extends LoginStates {
+  RegisterInitial();
 }
 
-class CreateUserError extends LoginStates {
+class RegisterLoading extends LoginStates {
+  RegisterLoading();
+}
+
+class RegisterSuccess extends LoginStates {
+  final UserModel userModel;
+  RegisterSuccess(this.userModel);
+}
+
+class RegisterError extends LoginStates {
   final String error;
 
-  CreateUserError(this.error);
+  RegisterError(this.error);
 }
 
 class LoginNotLogged extends LoginStates {
@@ -48,7 +56,7 @@ class AuthUserNotifier extends StateNotifier<LoginStates> {
     ),
   );
 
-  AuthUserNotifier(this._iUserService) : super(LoginInitial());
+  AuthUserNotifier(this._iUserService) : super(RegisterInitial());
   final IUserService _iUserService;
 
   Future<void> login({
@@ -74,49 +82,21 @@ class AuthUserNotifier extends StateNotifier<LoginStates> {
     required String firstname,
     required String lastname,
   }) async {
-    state = LoginLoading();
+    state = RegisterLoading();
     try {
-      final dataRegister = await _iUserService.register(
+      final dataRegister = await _iUserService.createAccount(
         email: email,
         password: password,
-        surepassword: surepassword,
-        firstname: firstname,
-        lastname: lastname,
+        firstName: firstname,
+        lastName: lastname,
       );
 
-      state = LoginSuccess(dataRegister);
+      state = RegisterSuccess(dataRegister);
 
       debugPrint(state.toString());
       debugPrint('ooooo');
-     } catch (e) {
-       state = LoginError((e as StateError).message);
+    } catch (e) {
+      state = RegisterError((e as StateError).message);
     }
   }
-
-  // Future<void> createRegister({
-  //   required String email,
-  //   required String password,
-  //   required String surepassword,
-  //   required String firstname,
-  //   required String lastname,
-  //   required String uid,
-  // }) async {
-  //   state = LoginLoading();
-  //   //try {
-  //   final dataRegister = await _iUserService.createUser(
-  //       email: email,
-  //       password: password,
-  //       surepassword: surepassword,
-  //       firstname: firstname, lastname: lastname,
-  //       uid: uid,
-  //   );
-  //
-  //   state = CreateUserSuccess(dataRegister);
-  //
-  //   debugPrint(state.toString());
-  //   debugPrint('ooooo');
-  //   // } catch (e) {
-  //   //   state = LoginError((e as StateError).message);
-  //   // }
-  // }
 }

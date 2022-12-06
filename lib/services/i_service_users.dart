@@ -13,21 +13,13 @@ abstract class IUserService {
     required String password,
   });
 
-  Future<UserModel> register ({
+  Future<UserModel> createAccount ({
     required String email,
     required String password,
-    required String surepassword,
-    required String firstname,
-    required String lastname,
+    required String firstName,
+    required String lastName,
   });
 
-  // Future<UserModel> createUser({
-  //   required email,
-  //   required password,
-  //   required surepassword,
-  //   required firstname,
-  //   required lastname,
-  //   required uid,
-  // });
+
 
 }
